@@ -1,0 +1,269 @@
+<ion-header class="header-rosa">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">Pastelería</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contenedor">
+
+  <div class="layout">
+
+    <!-- =======================
+         🩷 LISTA DE PASTELES
+    ======================== -->
+    <div class="lista-pasteles">
+
+      <h2 class="titulo-seccion">Menú de Pasteles</h2>
+
+      <div class="grid">
+        <div class="card" *ngFor="let p of pasteles">
+
+          <div class="img-box">
+            <img [src]="p.imagen" alt="{{ p.nombre }}" />
+          </div>
+
+          <h3>{{ p.nombre }}</h3>
+          <p><strong>Sabor:</strong> {{ p.sabor }}</p>
+          <p><strong>Precio:</strong> ${{ p.precio }}</p>
+          <p><strong>Stock:</strong> {{ p.stock }}</p>
+
+          <ion-button class="btn-add" [disabled]="p.stock <= 0" (click)="agregarAlCarrito(p)">
+            <ion-icon name="cart-outline"></ion-icon>
+            Agregar
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================
+         👜 CARRITO DE COMPRAS
+    ======================== -->
+    <div class="carrito">
+
+      <h2 class="titulo-seccion">Carrito</h2>
+
+      <div *ngIf="carrito.length === 0" class="vacio">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <p>Tu carrito está vacío</p>
+      </div>
+
+      <div class="item-carrito" *ngFor="let item of carrito; let i = index">
+        <div class="item-left">
+          <strong>{{ item.nombre }}</strong>
+          <small>Cant: {{ item.cantidad }}</small>
+        </div>
+        <div class="item-right">
+          <strong>$ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</strong>
+          <ion-button color="danger" size="small" (click)="eliminarDelCarrito(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="total">
+        <strong>Total:</strong> ${{ total | number:'1.2-2' }}
+      </div>
+
+      <ion-button expand="block" class="btn-pago efectivo"
+                  (click)="pagarEfectivo()"
+                  [disabled]="carrito.length===0">
+        <ion-icon name="cash-outline"></ion-icon>
+        Pagar en efectivo
+      </ion-button>
+
+      <ion-button expand="block" class="btn-pago paypal"
+                  (click)="inicializarPaypal()"
+                  [disabled]="carrito.length===0">
+        <ion-icon name="logo-paypal"></ion-icon>
+        Pagar con PayPal
+      </ion-button>
+
+      <div id="paypal-button-container" class="paypal-container"></div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<style>
+/* ===== Contenedor Principal ===== */
+.contenedor {
+  background: #ffeef7;
+  height: 100%;
+  padding: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== Header Rosa ===== */
+.header-rosa {
+  --background: #ffb6d9;
+  --color: white;
+  box-shadow: 0 4px 10px rgba(255, 150, 200, 0.5);
+}
+
+/* ===== Layout Flex ===== */
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* ===== Lista de Pasteles ===== */
+.lista-pasteles {
+  width: 65%;
+}
+
+.titulo-seccion {
+  color: #ff5f97;
+  font-weight: 800;
+  margin-bottom: 12px;
+  font-size: 1.6em;
+  text-align: left;
+}
+
+/* ===== Grid de Tarjetas ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ===== Card Pasteles ===== */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 6px 15px rgba(255, 150, 200, 0.3);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 150, 200, 0.45);
+}
+
+/* ===== Imagen de Pasteles ===== */
+.img-box {
+  width: 130px;
+  height: 130px;
+  margin: auto;
+  border-radius: 50%;
+  border: 4px solid #ffb6d9;
+  background: #fff2fa;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.img-box img:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Botón Agregar ===== */
+.btn-add {
+  margin-top: 10px;
+  --background: #ff6fa3;
+  --border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-add:hover {
+  --background: #ff3f85;
+}
+
+/* ===== Carrito ===== */
+.carrito {
+  width: 35%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(255, 150, 200, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vacio {
+  text-align: center;
+  color: #ff5f97;
+}
+
+.item-carrito {
+  background: #fff0f7;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.item-carrito:hover {
+  background: #ffd3e6;
+}
+
+/* ===== Total ===== */
+.total {
+  margin-top: 10px;
+  font-size: 19px;
+  color: #ff3f85;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* ===== Botones de Pago ===== */
+.btn-pago {
+  margin-top: 10px;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.efectivo {
+  --background: #ff8fb8;
+}
+
+.paypal {
+  --background: #00457c;
+  color: white;
+}
+
+/* ===== Media Query ===== */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .lista-pasteles,
+  .carrito {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

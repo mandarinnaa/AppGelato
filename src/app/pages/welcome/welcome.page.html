@@ -1,0 +1,197 @@
+<ion-header class="header-transparent">
+  <ion-toolbar class="toolbar-clear">
+    <ion-buttons slot="start">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="welcome-container" fullscreen>
+
+  <div class="content-wrap">
+    <div class="logo-box" role="img" aria-label="Logo Gelato">
+      <img src="assets/logo.png" alt="Logo App" class="kawaii-logo" />
+    </div>
+
+    <div class="welcome-text" aria-hidden="false">
+      <h1>Bienvenid@</h1>
+      <p>Tu pastelería digital elegante y dulce</p>
+    </div>
+
+    <div class="buttons-box">
+
+      <ion-button expand="block" routerLink="/register" class="btn-primary ion-no-margin">
+        <ion-icon name="person-add-outline" slot="start" aria-hidden="true"></ion-icon>
+        Registrarse
+      </ion-button>
+
+      <ion-button expand="block" fill="outline" routerLink="/login" class="btn-outline ion-no-margin">
+        <ion-icon name="log-in-outline" slot="start" aria-hidden="true"></ion-icon>
+        Iniciar sesión
+      </ion-button>
+
+      <a routerLink="/forgot-password" class="forgot-link" tabindex="0">
+        ¿Olvidaste tu contraseña?
+      </a>
+    </div>
+  </div>
+
+</ion-content>
+
+<style>
+  :host {
+  --pastel-100: #ffeef60d; 
+  --pastel-200: #db9aba; 
+  --pastel-300: #ffbfdc; 
+  --pastel-400: #d580ab; 
+  --pastel-500: #e965a9; 
+  --text-700: #000000;   
+}
+
+.header-transparent {
+  background: transparent;
+  --box-shadow: none;
+  ion-toolbar.toolbar-clear {
+    height: 56px;
+  }
+}
+
+.welcome-container {
+  --background: linear-gradient(180deg, var(--pastel-100) 0%, #fff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  min-height: 100%;
+}
+
+.content-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 40px 18px;
+  box-sizing: border-box;
+}
+
+.logo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.kawaii-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 20px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25));
+  box-shadow: 0 8px 24px rgba(255, 128, 194, 0.12);
+  transition: transform .28s ease;
+}
+
+.kawaii-logo:hover,
+.kawaii-logo:focus {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.welcome-text h1 {
+  margin: 6px 0 4px;
+  font-size: 1.8rem;
+  color: var(--text-700);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.welcome-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(74, 58, 63, 0.8);
+}
+
+.buttons-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+ion-button.btn-primary {
+  --background: var(--pastel-300);
+  --background-activated: var(--pastel-400);
+  --color: #fff;
+  --border-radius: 14px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --box-shadow: 0 6px 18px rgba(255, 128, 194, 0.12);
+  font-weight: 600;
+  font-size: 1.02rem;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+}
+ion-button.btn-outline {
+  --background: transparent;
+  --border-color: rgba(255, 128, 194, 0.34);
+  --color: var(--text-700);
+  --border-radius: 14px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-weight: 600;
+  font-size: 1.02rem;
+  text-transform: none;
+}
+ion-button ion-icon {
+  font-size: 1.15rem;
+  margin-inline-end: 8px;
+}
+
+.forgot-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: rgba(74, 58, 63, 0.8);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255,128,194,0.25);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+:focus {
+  outline: none;
+}
+
+ion-button:focus,
+a:focus,
+.kawaii-logo:focus {
+  box-shadow: 0 0 0 4px rgba(255,128,194,0.16);
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .content-wrap {
+    padding: 56px 28px;
+    gap: 22px;
+  }
+
+  .kawaii-logo {
+    width: 170px;
+    height: 170px;
+  }
+
+  .welcome-text h1 {
+    font-size: 2.1rem;
+  }
+
+  ion-button.btn-primary,
+  ion-button.btn-outline {
+    font-size: 1.06rem;
+  }
+}
+
+</style>

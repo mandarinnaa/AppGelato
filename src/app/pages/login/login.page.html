@@ -1,0 +1,118 @@
+<ion-header class="header">
+  <ion-toolbar class="header-toolbar">
+    <ion-title class="header-title">Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-container">
+<br>
+<br>
+<br>
+<br>
+  <ion-card class="card-container animate-fade">
+
+    <ion-card-header class="card-header">
+      <ion-card-title class="title-form">Bienvenido</ion-card-title>
+      <p class="subtitle">Ingresa para continuar</p>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <form (ngSubmit)="onLogin()">
+
+        <ion-item class="input-item">
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" class="btn-login" type="submit">
+          Iniciar sesión
+        </ion-button>
+
+      </form>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
+<style>
+  .login-container {
+  --background: #fde8f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 22px;
+}
+
+.card-container {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+  border-radius: 18px;
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.title-form {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #d65d8c;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+.input-item {
+  --highlight-color-focused: #d65d8c;
+  margin-bottom: 12px;
+  border-radius: 10px;
+}
+
+.btn-login {
+  --background: #f7b6cc;
+  --background-hover: #e39ab4;
+  --background-activated: #e39ab4;
+  margin-top: 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.btn-register {
+  color: #d65d8c;
+  font-weight: 500;
+}
+
+.header-toolbar {
+  --background: #fde8f1;
+  --color: #d65d8c;
+}
+
+.header-title {
+  font-weight: 600;
+}
+
+.animate-fade {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+</style>

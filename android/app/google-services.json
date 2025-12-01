@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "626331363006",
+    "firebase_url": "https://gelatoapp-38bad-default-rtdb.firebaseio.com",
+    "project_id": "gelatoapp-38bad",
+    "storage_bucket": "gelatoapp-38bad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626331363006:android:384e6af21f11188f2b60ef",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIqEejUNGJSKvWzDKnJ5rF93VxUqpiNXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

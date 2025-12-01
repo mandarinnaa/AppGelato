@@ -1,0 +1,156 @@
+<ion-menu contentId="main-content" type="overlay">
+  <ion-header>
+    <ion-toolbar class="menu-header">
+      <ion-title>
+        <img src="assets/gelato.png" alt="Gelato" class="logo-menu" />
+        Gelato
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="menu-content">
+    <ion-list class="menu-list">
+
+      <ion-item routerLink="/dashboard/pasteleria" button lines="none" class="menu-item">
+        <ion-icon slot="start" name="storefront-outline"></ion-icon>
+        <ion-label>Pastelería</ion-label>
+      </ion-item>
+
+      <ion-item routerLink="/dashboard/subir-pasteles" button lines="none" class="menu-item">
+        <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+        <ion-label>Subir pasteles</ion-label>
+      </ion-item>
+
+      <ion-item button (click)="logout()" lines="none" class="menu-item logout-item">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        <ion-label>Cerrar sesión</ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+  <ion-header>
+    <ion-toolbar class="main-header">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="dashboard-container">
+<div id="main-content">
+
+    <!-- Sección de bienvenida -->
+    <div class="welcome-section">
+      <img src="assets/Sereno.png" alt="Gelato Logo" class="logo-app" />
+      <h1>Bienvenida a Sereno</h1>
+            <img src="assets/chef.png" alt="Chef Sereno" class="chef-img" />
+
+      <p class="buena-venta">¡Buena venta!</p>
+    </div>
+
+    
+
+    <router-outlet></router-outlet>
+    </div>
+
+  </ion-content>
+
+<style>
+.dashboard-container {
+  --background: #fff5fb; 
+  padding: 12px;
+}
+
+/* Header */
+.main-header {
+  --background: #ff8fc8;
+  --color: white;
+  font-weight: bold;
+}
+
+.menu-header {
+  --background: #ff8fc8;
+  --color: white;
+  font-weight: bold;
+}
+
+/* Menu lateral */
+.menu-content {
+  --background: #ffe3f0; 
+}
+
+.menu-list {
+  padding-top: 10px;
+}
+
+.menu-item {
+  --background: transparent;
+  --color: #c2185b;
+  font-weight: 600;
+  border-radius: 12px;
+  margin: 8px 14px;
+  padding: 6px 4px;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.menu-item:hover {
+  background-color: #ffd3e4;
+  transform: translateX(4px);
+}
+
+.menu-item ion-icon {
+  color: #c2185b;
+  font-size: 24px;
+}
+
+.logout-item {
+  margin-top: 20px;
+  color: #ab003c !important;
+}
+
+.logout-item ion-icon {
+  color: #ab003c;
+}
+
+.logo-menu {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Bienvenida */
+.welcome-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logo-app {
+  width: 420px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.welcome-section h1 {
+  color: #ff5f97;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chef-img {
+  width: 250px;
+  margin-bottom: 15px;
+}
+
+.buena-venta {
+  font-size: 18px;
+  color: #ff3f85;
+  font-weight: 600;
+}
+
+
+</style>

@@ -1,0 +1,253 @@
+<ion-header>
+  <ion-toolbar class="header-rosa">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">Subir Pasteles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+
+  <!-- FORMULARIO -->
+  <form (ngSubmit)="crearPastel()" class="form-box">
+
+    <ion-item class="input">
+      <ion-icon name="create-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" name="nombre" required></ion-input>
+    </ion-item>
+
+    <ion-item class="input">
+      <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="precio" name="precio" required></ion-input>
+    </ion-item>
+
+    <ion-item class="input">
+      <ion-icon name="ice-cream-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Sabor</ion-label>
+      <ion-input [(ngModel)]="sabor" name="sabor" required></ion-input>
+    </ion-item>
+
+    <ion-item class="input">
+      <ion-icon name="cube-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number" [(ngModel)]="stock" name="stock" required></ion-input>
+    </ion-item>
+
+    <!-- SUBIR IMAGEN -->
+    <ion-item class="input">
+      <ion-icon name="images-outline" slot="start"></ion-icon>
+      <ion-label>Imagen del pastel</ion-label>
+      <input type="file" (change)="seleccionarImagen($event)" accept="image/*">
+    </ion-item>
+
+    <!-- PREVIEW -->
+    <div class="preview" *ngIf="imagenPreview">
+      <img [src]="imagenPreview">
+    </div>
+
+    <ion-button type="submit" expand="block" class="btn-rosa" [disabled]="cargando">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+      <span>{{ cargando ? 'Guardando...' : 'Guardar pastel' }}</span>
+    </ion-button>
+
+  </form>
+
+  <h2 class="title-lista">Lista de Pasteles</h2>
+
+  <!-- LISTADO -->
+  <div class="lista-grid">
+
+    <div class="card" *ngFor="let pastel of pasteles">
+
+      <!-- ⬇️ CONTENEDOR NUEVO PARA QUE LA IMAGEN SE VEA COMPLETA -->
+      <div class="img-box">
+        <img [src]="pastel.imagen" class="img-pastel">
+      </div>
+
+      <div class="info">
+        <h3>{{ pastel.nombre }}</h3>
+        <p><strong>Precio:</strong> ${{ pastel.precio }}</p>
+        <p><strong>Sabor:</strong> {{ pastel.sabor }}</p>
+        <p><strong>Stock:</strong> {{ pastel.stock }}</p>
+
+        <ion-button size="small" class="btn-edit" (click)="editarStock(pastel)">
+          <ion-icon name="build-outline"></ion-icon>
+          Editar stock
+        </ion-button>
+
+        <ion-button size="small" color="danger" (click)="eliminarPastel(pastel.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+          Eliminar
+        </ion-button>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+<style>
+  /* 🩷 CONTENEDOR GENERAL */
+.container {
+  padding: 20px;
+  background: #ffeef7;
+}
+
+/* 🩷 HEADER ROSA */
+.header-rosa {
+  --background: #ffb6d9;
+  --color: #ffffff;
+}
+
+.titulo {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 🩷 FORMULARIO */
+.form-box {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(255, 150, 200, 0.35);
+  margin-bottom: 25px;
+}
+
+.input {
+  --background: #fff0f7;
+  border-radius: 12px;
+  margin-bottom: 15px;
+
+  ion-icon {
+    color: #ff6fa3;
+  }
+}
+
+/* 🩷 PREVIEW */
+.preview {
+  text-align: center;
+  margin: 15px 0;
+
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid #ffb6d9;
+  }
+}
+
+/* 🩷 BOTÓN ROSA */
+.btn-rosa {
+  --background: #ff6fa3;
+  --background-activated: #ff4f8c;
+  --border-radius: 12px;
+  margin-top: 10px;
+  font-weight: bold;
+
+  ion-icon {
+    margin-right: 8px;
+  }
+}
+
+/* 🩷 TÍTULO DE LISTA */
+.title-lista {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff5f97;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+/* =============================== */
+/*     🩷 GRID DE 4 CARDS POR FILA */
+/* =============================== */
+
+.lista-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 por fila */
+  gap: 15px;
+}
+
+/* PANTALLAS MÁS PEQUEÑAS */
+@media (max-width: 900px) {
+  .lista-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .lista-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* 🩷 CARD */
+.card {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(255, 150, 200, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 🩷 ⬇️ NUEVO CONTENEDOR DE IMAGEN (IMAGEN COMPLETA) */
+.img-box {
+  width: 110px;
+  height: 110px;
+  background: #fff2fa;
+  border-radius: 14px;
+  border: 3px solid #ffb6d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  overflow: hidden; /* Evita cortes */
+}
+
+/* 🩷 IMAGEN COMPLETA SIN CORTARSE */
+.img-pastel {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* 🔥 La imagen ya no se corta */
+}
+
+/* INFO */
+.info h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #ff3f85;
+  font-weight: bold;
+}
+
+.info p {
+  margin: 3px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+/* BOTÓN EDITAR */
+.btn-edit {
+  --background: #ffd4e8;
+  --color: #ff3f85;
+  width: 100%;
+  margin-top: 8px;
+
+  ion-icon {
+    margin-right: 5px;
+  }
+}
+
+/* BOTÓN ELIMINAR */
+ion-button[color="danger"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+</style>
